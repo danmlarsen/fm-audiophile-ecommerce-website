@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import './globals.css';
 
+import Header from '@/components/ui/header';
+import Footer from '@/components/footer';
+
 const manropeSans = Manrope({
   subsets: ['latin'],
 });
@@ -18,7 +21,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manropeSans.className} antialiased`}>{children}</body>
+      <body className={`${manropeSans.className} antialiased`}>
+        <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+          <div className="bg-black text-white">
+            <div className="max-w-6xl mx-auto py-8">
+              <Header />
+            </div>
+          </div>
+
+          <div className="grid place-items-center">{children}</div>
+
+          <div className="bg-black text-white">
+            <div className="max-w-6xl mx-auto pt-16 pb-12">
+              <Footer />
+            </div>
+          </div>
+        </div>
+      </body>
     </html>
   );
 }

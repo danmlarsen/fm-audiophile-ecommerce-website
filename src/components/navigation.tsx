@@ -14,7 +14,7 @@ const navData = [
     href: '/category/speakers',
   },
   {
-    title: 'Home',
+    title: 'Earphones',
     href: '/category/earphones',
   },
 ];
@@ -22,7 +22,7 @@ const navData = [
 export default function Navigation() {
   return (
     <nav>
-      <ul className="flex items-center gap-8 uppercase font-bold text-sm tracking-wide">
+      <ul className="flex items-center gap-8 uppercase font-bold text-[13px] tracking-[2px]">
         {navData.map(({ title, href }) => (
           <li key={title}>
             <Link href={href}>{title}</Link>
