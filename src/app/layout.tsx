@@ -29,7 +29,7 @@ export default function RootLayout({
             </div>
           </div>
 
-          <div className="grid place-items-center">{children}</div>
+          <main>{children}</main>
 
           <div className="bg-black text-white">
             <div className="max-w-6xl mx-auto pt-16 pb-12">
