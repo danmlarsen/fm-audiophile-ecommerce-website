@@ -1,19 +1,18 @@
 import BestAudioGear from '@/components/best-audio-gear';
+import FeaturedProducts from '@/components/featured-products';
 import NewProductHero from '@/components/new-product-hero';
+import ProductCategories from '@/components/product-categories';
 
 export default function HomePage() {
   return (
     <>
       <NewProductHero />
-      <div className="w-lg space-y-6">
-        <h1>Hello, world</h1>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem nobis laudantium, quae voluptatem voluptas, earum et repellat, reiciendis recusandae est
-          quas dolor aliquid cumque. Reprehenderit animi aut deserunt dolores ea maxime reiciendis voluptatibus deleniti suscipit id? Iusto obcaecati dolorem
-          quaerat natus aspernatur omnis, deserunt numquam sint ea ipsa excepturi assumenda?
-        </p>
+
+      <div className="max-w-6xl mx-auto mt-32 space-y-40">
+        <ProductCategories />
+        <FeaturedProducts />
+        <BestAudioGear />
       </div>
-      <BestAudioGear />
     </>
   );
 }
