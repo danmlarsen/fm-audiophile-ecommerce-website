@@ -7,15 +7,15 @@ const navData = [
   },
   {
     title: "Headphones",
-    href: "/category/headphones",
+    href: "/headphones",
   },
   {
     title: "Speakers",
-    href: "/category/speakers",
+    href: "/speakers",
   },
   {
     title: "Earphones",
-    href: "/category/earphones",
+    href: "/earphones",
   },
 ];
 

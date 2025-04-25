@@ -9,17 +9,17 @@ import IconArrowRight from "./ui/icons/IconArrowRight";
 const categoryMockData = [
   {
     title: "Headphones",
-    href: "/categories/headphones",
+    href: "/headphones",
     image: ImageHeadphones,
   },
   {
     title: "Speakers",
-    href: "/categories/speakers",
+    href: "/speakers",
     image: ImageSpeakers,
   },
   {
     title: "Earphones",
-    href: "/categories/earphones",
+    href: "/earphones",
     image: ImageEarphones,
   },
 ];
