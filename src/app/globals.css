@@ -46,6 +46,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-gray-200: hsl(0, 0%, 95%);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);

@@ -53,7 +53,7 @@ export default function FeaturedProducts() {
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col items-start justify-center space-y-8 rounded-lg bg-gray-100 px-24">
+          <div className="flex flex-col items-start justify-center space-y-8 rounded-lg bg-gray-200 px-24">
             <h2 className="text-4xl font-bold uppercase">YX1 Earphones</h2>
             <Button variant="outline">See product</Button>
           </div>
