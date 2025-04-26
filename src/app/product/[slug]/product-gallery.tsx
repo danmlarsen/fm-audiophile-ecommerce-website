@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function ProductGallery({ product }: { product: TProductData }) {
   return (
     <section>
-      <div className="grid h-[592px] grid-cols-2 gap-8">
+      <div className="grid h-[592px] grid-cols-[auto_635px] gap-8">
         {product.galleryImages.map((image, index) => (
           <div
             key={index}

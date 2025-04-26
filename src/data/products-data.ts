@@ -27,6 +27,7 @@ import ImageYX1Gallery3 from "@/assets/images/products/product-yx1-earphones/des
 import { StaticImageData } from "next/image";
 
 export type TProductData = {
+  id: number;
   title: string;
   shortTitle: string;
   slug: string;
@@ -42,6 +43,7 @@ export type TProductData = {
 
 export const productsData: TProductData[] = [
   {
+    id: 0,
     title: "XX99 Mark II Headphones",
     shortTitle: "XX99 Mark II",
     slug: "xx99-mark-ii-headphones",
@@ -82,6 +84,7 @@ export const productsData: TProductData[] = [
     ],
   },
   {
+    id: 1,
     title: "XX99 Mark I Headphones",
     shortTitle: "XX99 Mark I",
     slug: "xx99-mark-i-headphones",
@@ -114,6 +117,7 @@ export const productsData: TProductData[] = [
     galleryImages: [ImageXX99IGallery1, ImageXX99IGallery2, ImageXX99IGallery3],
   },
   {
+    id: 2,
     title: "XX59 Headphones",
     shortTitle: "XX59",
     slug: "xx59-headphones",
@@ -146,6 +150,7 @@ export const productsData: TProductData[] = [
     galleryImages: [ImageXX59Gallery1, ImageXX59Gallery2, ImageXX59Gallery3],
   },
   {
+    id: 3,
     title: "ZX9 Speaker",
     shortTitle: "ZX9 Speaker",
     slug: "zx9-speaker",
@@ -182,6 +187,7 @@ export const productsData: TProductData[] = [
     galleryImages: [ImageZX9Gallery1, ImageZX9Gallery2, ImageZX9Gallery3],
   },
   {
+    id: 4,
     title: "ZX7 Speaker",
     shortTitle: "ZX7 Speaker",
     slug: "zx7-speaker",
@@ -218,6 +224,7 @@ export const productsData: TProductData[] = [
     galleryImages: [ImageZX7Gallery1, ImageZX7Gallery2, ImageZX7Gallery3],
   },
   {
+    id: 5,
     title: "YX1 Wireless Earphones",
     shortTitle: "YX1 Wireless",
     slug: "yx1-wireless-earphones",

@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Header from "@/components/ui/header";
 import Footer from "@/components/footer";
+import { CartProvider } from "@/context/cart-context";
 
 const manropeSans = Manrope({
   subsets: ["latin"],
@@ -22,21 +23,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manropeSans.className} antialiased`}>
-        <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
-          <div className="bg-[#141414] px-6 text-white">
-            <div className="mx-auto max-w-6xl py-8">
-              <Header />
+        <CartProvider>
+          <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+            <div className="bg-[#141414] px-6 text-white">
+              <div className="mx-auto max-w-6xl py-8">
+                <Header />
+              </div>
+            </div>
+
+            <main>{children}</main>
+
+            <div className="mt-40 bg-[#141414] px-6 text-white">
+              <div className="mx-auto max-w-6xl pt-16 pb-12">
+                <Footer />
+              </div>
             </div>
           </div>
-
-          <main>{children}</main>
-
-          <div className="mt-40 bg-[#141414] px-6 text-white">
-            <div className="mx-auto max-w-6xl pt-16 pb-12">
-              <Footer />
-            </div>
-          </div>
-        </div>
+        </CartProvider>
       </body>
     </html>
   );

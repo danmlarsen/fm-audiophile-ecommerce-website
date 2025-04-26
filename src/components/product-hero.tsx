@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import ProductAddToCart from "@/app/product/[slug]/product-add-to-cart";
 
 export default function ProductHero({
   product,
@@ -42,7 +43,7 @@ export default function ProductHero({
             {productPage ? (
               <>
                 <strong>$ {product.price}</strong>
-                <div>ADD TO CART</div>
+                <ProductAddToCart product={product} />
               </>
             ) : (
               <Button asChild>
