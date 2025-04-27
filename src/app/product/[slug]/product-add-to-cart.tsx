@@ -9,7 +9,7 @@ export default function ProductAddToCart({
 }: {
   product: TProductData;
 }) {
-  const { addCartItem } = useCart()!;
+  const { addCartItem } = useCart();
 
   return (
     <div>

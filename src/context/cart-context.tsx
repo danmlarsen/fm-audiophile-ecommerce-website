@@ -16,6 +16,11 @@ type TCartContext = {
   addCartItem: (newCartItem: TCartItem) => void;
   removeCartItem: (productId: number, removeAmount: number) => void;
   setCartItemAmount: (productId: number, newAmount: number) => void;
+  resetCart: () => void;
+  calcTotal: () => number;
+  calcCartItemTotal: (productId: number) => number;
+  incrementCartItemAmount: (productId: number) => void;
+  decrementCartItemAmount: (productId: number) => void;
 };
 
 export const CartContext = createContext<TCartContext | null>(null);
@@ -71,6 +76,59 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
+  function resetCart() {
+    setCartItems([]);
+  }
+
+  function calcTotal() {
+    return cartItems.reduce(
+      (total, cartItem) => cartItem.amount * cartItem.price + total,
+      0,
+    );
+  }
+
+  function calcCartItemTotal(productId: number) {
+    const cartItem = cartItems.find(
+      (cartItem) => cartItem.productId === productId,
+    );
+    if (!cartItem) return 0;
+
+    return cartItem.price * cartItem.amount;
+  }
+
+  function incrementCartItemAmount(productId: number) {
+    setCartItems((cartItems) => {
+      const existingCartItem = cartItems.find(
+        (cartItem) => cartItem.productId === productId,
+      );
+      if (!existingCartItem) return cartItems;
+
+      return cartItems.map((cartItem) =>
+        cartItem.productId === productId
+          ? { ...cartItem, amount: cartItem.amount + 1 }
+          : cartItem,
+      );
+    });
+  }
+
+  function decrementCartItemAmount(productId: number) {
+    setCartItems((cartItems) => {
+      const existingCartItem = cartItems.find(
+        (cartItem) => cartItem.productId === productId,
+      );
+      if (!existingCartItem) return cartItems;
+
+      if (existingCartItem.amount - 1 <= 0)
+        return cartItems.filter((cartItem) => cartItem.productId !== productId);
+
+      return cartItems.map((cartItem) =>
+        cartItem.productId === productId
+          ? { ...cartItem, amount: cartItem.amount - 1 }
+          : cartItem,
+      );
+    });
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -78,6 +136,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addCartItem,
         removeCartItem,
         setCartItemAmount,
+        resetCart,
+        calcTotal,
+        calcCartItemTotal,
+        incrementCartItemAmount,
+        decrementCartItemAmount,
       }}
     >
       {children}
@@ -86,5 +149,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useCart() {
-  return useContext(CartContext);
+  const cartContext = useContext(CartContext);
+  if (cartContext === null) throw new Error("Cart context is null");
+  return cartContext;
 }
