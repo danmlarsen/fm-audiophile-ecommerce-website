@@ -90,7 +90,7 @@ function CartItemAmountInput({ productId }: { productId: number }) {
     <div className="grid w-[120px] grid-cols-3 items-center">
       <Button
         onClick={() => decrementCartItemAmount(productId)}
-        className="text-muted bg-transparent p-4 hover:bg-transparent hover:text-black"
+        className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
       >
         -
       </Button>
@@ -100,11 +100,11 @@ function CartItemAmountInput({ productId }: { productId: number }) {
         max={9}
         value={amount?.toString()}
         onChange={(e) => setAmount(+e.target.value)}
-        className="h-full w-[40px] focus-visible:ring-0"
+        className="h-full w-[40px] border-0 shadow-none focus-visible:ring-0"
       />
       <Button
         onClick={() => incrementCartItemAmount(productId)}
-        className="text-muted bg-transparent p-4 hover:bg-transparent hover:text-black"
+        className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
       >
         +
       </Button>
