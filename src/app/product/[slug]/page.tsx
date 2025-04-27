@@ -1,12 +1,15 @@
 import ProductHero from "@/components/product-hero";
 import { productsData } from "@/data/products-data";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 import ProductFeatures from "./product-features";
 import ProductGallery from "./product-gallery";
-import ProductAlternatives from "./product-alternatives";
-import ProductCategories from "@/components/product-categories";
+import { defineQuery } from "next-sanity";
+import { client } from "@/sanity/client";
+
+const PRODUCTS_QUERY = defineQuery(
+  `*[_type == 'product' && slug.current == $slug][0]`,
+);
 
 export default async function ProductPage({
   params,
@@ -15,7 +18,9 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
 
-  const product = productsData.find((product) => product.slug === slug);
+  console.log(slug);
+
+  const product = await client.fetch(PRODUCTS_QUERY, { slug });
 
   if (!product) notFound();
 

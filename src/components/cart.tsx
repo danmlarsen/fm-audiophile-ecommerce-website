@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
+import { urlFor } from "@/lib/utils";
 
 export default function Cart() {
   const {
@@ -25,29 +26,35 @@ export default function Cart() {
         </Button>
       </div>
 
-      <ul>
-        {cartItems.map((cartItem) => (
-          <li
-            key={cartItem.productId}
-            className="grid grid-cols-[auto_1fr_auto] items-center gap-4"
-          >
-            <div className="relative size-16">
-              <Image
-                src={cartItem.image}
-                alt={`Image of ${cartItem.title}`}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div>
-              <h4>{cartItem.title}</h4>
-              <span>${calcCartItemTotal(cartItem.productId)}</span>
-            </div>
-            <div>
-              <CartItemAmountInput productId={cartItem.productId} />
-            </div>
-          </li>
-        ))}
+      <ul className="space-y-6">
+        {cartItems.map((cartItem) => {
+          const imageUrl = cartItem.image
+            ? urlFor(cartItem.image)?.width(64).height(64).url()
+            : null;
+
+          return (
+            <li
+              key={cartItem.productId}
+              className="grid grid-cols-[auto_1fr_auto] items-center gap-4"
+            >
+              <div className="relative size-16">
+                <Image
+                  src={imageUrl || "https://placehold.co/64x64/png"}
+                  alt={`Image of ${cartItem.title}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h4>{cartItem.title}</h4>
+                <span>${calcCartItemTotal(cartItem.productId)}</span>
+              </div>
+              <div>
+                <CartItemAmountInput productId={cartItem.productId} />
+              </div>
+            </li>
+          );
+        })}
       </ul>
 
       <div className="flex items-center justify-between">
@@ -60,7 +67,7 @@ export default function Cart() {
   );
 }
 
-function CartItemAmountInput({ productId }: { productId: number }) {
+function CartItemAmountInput({ productId }: { productId: string }) {
   const {
     cartItems,
     incrementCartItemAmount,
@@ -100,7 +107,7 @@ function CartItemAmountInput({ productId }: { productId: number }) {
         max={9}
         value={amount?.toString()}
         onChange={(e) => setAmount(+e.target.value)}
-        className="h-full w-[40px] border-0 shadow-none focus-visible:ring-0"
+        className="h-full w-[40px] border-0 text-center shadow-none focus-visible:ring-0"
       />
       <Button
         onClick={() => incrementCartItemAmount(productId)}

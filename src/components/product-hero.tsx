@@ -1,26 +1,32 @@
 import { type TProductData } from "@/data/products-data";
-import { cn } from "@/lib/utils";
+import { cn, urlFor } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import ProductAddToCart from "@/app/product/[slug]/product-add-to-cart";
+import { PortableText } from "next-sanity";
+import { TProductDocument } from "@/types/productDocumentType";
 
 export default function ProductHero({
   product,
   productPage = false,
   reverse = false,
 }: {
-  product: TProductData;
+  product: TProductDocument;
   productPage?: boolean;
   reverse?: boolean;
 }) {
+  const productImageUrl = product.mainImage
+    ? urlFor(product.mainImage)?.width(560).height(560).url()
+    : null;
+
   return (
     <section>
       <div className="grid h-[560px] grid-cols-2 gap-6">
         <div className={cn("relative", reverse && "order-1")}>
           <Image
-            src={product.image}
-            alt={`Image of ${product.title}`}
+            src={productImageUrl || "https://placehold.co/560x560/png"}
+            alt={`Image of ${product.name}`}
             fill
             className="object-cover"
           />
@@ -32,13 +38,15 @@ export default function ProductHero({
           )}
         >
           <div className="max-w-[445px] space-y-6">
-            {product.new && (
+            {product.newProduct && (
               <small className="text-primary tracking-[10px] uppercase">
                 New product
               </small>
             )}
-            <h1 className="text-[40px] font-bold uppercase">{product.title}</h1>
-            <p>{product.description}</p>
+            <h1 className="text-[40px] font-bold uppercase">{product.name}</h1>
+            <div>
+              <PortableText value={product.description} />
+            </div>
 
             {productPage ? (
               <>
@@ -47,7 +55,9 @@ export default function ProductHero({
               </>
             ) : (
               <Button asChild>
-                <Link href={`/product/${product.slug}`}>See product</Link>
+                <Link href={`/product/${product.slug.current}`}>
+                  See product
+                </Link>
               </Button>
             )}
           </div>

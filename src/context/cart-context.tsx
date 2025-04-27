@@ -4,23 +4,23 @@ import { StaticImageData } from "next/image";
 import { createContext, useContext, useState } from "react";
 
 type TCartItem = {
-  productId: number;
+  productId: string;
   amount: number;
   title: string;
   price: number;
-  image: StaticImageData;
+  image: string;
 };
 
 type TCartContext = {
   cartItems: TCartItem[];
   addCartItem: (newCartItem: TCartItem) => void;
-  removeCartItem: (productId: number, removeAmount: number) => void;
-  setCartItemAmount: (productId: number, newAmount: number) => void;
+  removeCartItem: (productId: string, removeAmount: number) => void;
+  setCartItemAmount: (productId: string, newAmount: number) => void;
   resetCart: () => void;
   calcTotal: () => number;
-  calcCartItemTotal: (productId: number) => number;
-  incrementCartItemAmount: (productId: number) => void;
-  decrementCartItemAmount: (productId: number) => void;
+  calcCartItemTotal: (productId: string) => number;
+  incrementCartItemAmount: (productId: string) => void;
+  decrementCartItemAmount: (productId: string) => void;
 };
 
 export const CartContext = createContext<TCartContext | null>(null);
@@ -46,7 +46,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeCartItem(productId: number, removeAmount: number) {
+  function removeCartItem(productId: string, removeAmount: number) {
     setCartItems((prevCartItems) => {
       const currentCartItem = prevCartItems.find(
         (currentItem) => currentItem.productId === productId,
@@ -66,7 +66,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function setCartItemAmount(productId: number, newAmount: number) {
+  function setCartItemAmount(productId: string, newAmount: number) {
     setCartItems((prevCartItems) =>
       prevCartItems.map((prevCartItem) =>
         prevCartItem.productId === productId
@@ -87,7 +87,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  function calcCartItemTotal(productId: number) {
+  function calcCartItemTotal(productId: string) {
     const cartItem = cartItems.find(
       (cartItem) => cartItem.productId === productId,
     );
@@ -96,7 +96,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return cartItem.price * cartItem.amount;
   }
 
-  function incrementCartItemAmount(productId: number) {
+  function incrementCartItemAmount(productId: string) {
     setCartItems((cartItems) => {
       const existingCartItem = cartItems.find(
         (cartItem) => cartItem.productId === productId,
@@ -111,7 +111,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function decrementCartItemAmount(productId: number) {
+  function decrementCartItemAmount(productId: string) {
     setCartItems((cartItems) => {
       const existingCartItem = cartItems.find(
         (cartItem) => cartItem.productId === productId,

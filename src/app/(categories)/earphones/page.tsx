@@ -1,12 +1,14 @@
 import { productsData } from "@/data/products-data";
 import Products from "../products";
+import { defineQuery } from "next-sanity";
+import { client } from "@/sanity/client";
 
-export default function EarphonesPage() {
-  return (
-    <Products
-      productsData={productsData.filter(
-        (product) => product.category === "earphones",
-      )}
-    />
-  );
+const PRODUCTS_QUERY = defineQuery(
+  `*[_type == 'product' && defined(slug.current) && category == 'earphones']|order(newProduct desc, releaseDate desc)`,
+);
+
+export default async function EarphonesPage() {
+  const products = await client.fetch(PRODUCTS_QUERY, {});
+
+  return <Products productsData={products} />;
 }
