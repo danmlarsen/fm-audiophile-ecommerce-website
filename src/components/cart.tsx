@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/utils";
 
 export default function Cart() {
-  const {
-    cartItems,
-    addCartItem,
-    removeCartItem,
-    resetCart,
-    calcTotal,
-    calcCartItemTotal,
-  } = useCart();
+  const { cartItems, resetCart, calcTotal, calcCartItemTotal } = useCart();
+
+  if (cartItems.length === 0)
+    return (
+      <div className="grid place-items-center text-lg font-bold">
+        Cart is empty
+      </div>
+    );
 
   return (
     <div className="space-y-8">
@@ -34,23 +34,29 @@ export default function Cart() {
 
           return (
             <li
-              key={cartItem.productId}
+              key={cartItem.id}
               className="grid grid-cols-[auto_1fr_auto] items-center gap-4"
             >
               <div className="relative size-16">
                 <Image
                   src={imageUrl || "https://placehold.co/64x64/png"}
-                  alt={`Image of ${cartItem.title}`}
+                  alt={`Image of ${cartItem.name}`}
                   fill
                   className="object-cover"
                 />
               </div>
               <div>
-                <h4>{cartItem.title}</h4>
-                <span>${calcCartItemTotal(cartItem.productId)}</span>
+                <strong>{cartItem.name}</strong>
+                <div>
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0,
+                  }).format(cartItem.price)}
+                </div>
               </div>
               <div>
-                <CartItemAmountInput productId={cartItem.productId} />
+                <CartItemAmountInput id={cartItem.id} />
               </div>
             </li>
           );
@@ -59,7 +65,13 @@ export default function Cart() {
 
       <div className="flex items-center justify-between">
         <span className="uppercase">Total</span>
-        <strong>${calcTotal()}</strong>
+        <strong>
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0,
+          }).format(calcTotal())}
+        </strong>
       </div>
 
       <Button className="w-full">Checkout</Button>
@@ -67,7 +79,7 @@ export default function Cart() {
   );
 }
 
-function CartItemAmountInput({ productId }: { productId: string }) {
+function CartItemAmountInput({ id }: { id: string }) {
   const {
     cartItems,
     incrementCartItemAmount,
@@ -75,9 +87,7 @@ function CartItemAmountInput({ productId }: { productId: string }) {
     setCartItemAmount,
   } = useCart();
 
-  const cartItem = cartItems.find(
-    (cartItem) => cartItem.productId === productId,
-  );
+  const cartItem = cartItems.find((cartItem) => cartItem.id === id);
 
   if (!cartItem) return null;
 
@@ -89,14 +99,14 @@ function CartItemAmountInput({ productId }: { productId: string }) {
 
   useEffect(() => {
     if (amount && !isNaN(amount) && amount > 0 && amount <= 9) {
-      setCartItemAmount(productId, amount);
+      setCartItemAmount(id, amount);
     }
   }, [amount]);
 
   return (
     <div className="grid w-[120px] grid-cols-3 items-center">
       <Button
-        onClick={() => decrementCartItemAmount(productId)}
+        onClick={() => decrementCartItemAmount(id)}
         className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
       >
         -
@@ -110,7 +120,7 @@ function CartItemAmountInput({ productId }: { productId: string }) {
         className="h-full w-[40px] border-0 text-center shadow-none focus-visible:ring-0"
       />
       <Button
-        onClick={() => incrementCartItemAmount(productId)}
+        onClick={() => incrementCartItemAmount(id)}
         className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
       >
         +

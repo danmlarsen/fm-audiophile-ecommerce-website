@@ -1,12 +1,11 @@
 "use client";
 
-import { StaticImageData } from "next/image";
 import { createContext, useContext, useState } from "react";
 
 type TCartItem = {
-  productId: string;
+  id: string;
   amount: number;
-  title: string;
+  name: string;
   price: number;
   image: string;
 };
@@ -14,13 +13,13 @@ type TCartItem = {
 type TCartContext = {
   cartItems: TCartItem[];
   addCartItem: (newCartItem: TCartItem) => void;
-  removeCartItem: (productId: string, removeAmount: number) => void;
-  setCartItemAmount: (productId: string, newAmount: number) => void;
+  removeCartItem: (id: string, removeAmount: number) => void;
+  setCartItemAmount: (id: string, newAmount: number) => void;
   resetCart: () => void;
   calcTotal: () => number;
-  calcCartItemTotal: (productId: string) => number;
-  incrementCartItemAmount: (productId: string) => void;
-  decrementCartItemAmount: (productId: string) => void;
+  calcCartItemTotal: (id: string) => number;
+  incrementCartItemAmount: (id: string) => void;
+  decrementCartItemAmount: (id: string) => void;
 };
 
 export const CartContext = createContext<TCartContext | null>(null);
@@ -31,11 +30,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   function addCartItem(newCartItem: TCartItem) {
     setCartItems((prevCartItems) => {
       const existingCartItem = prevCartItems.find(
-        (item) => item.productId === newCartItem.productId,
+        (item) => item.id === newCartItem.id,
       );
       if (existingCartItem)
         return prevCartItems.map((prevCartItem) =>
-          prevCartItem.productId === newCartItem.productId
+          prevCartItem.id === newCartItem.id
             ? {
                 ...prevCartItem,
                 amount: prevCartItem.amount + newCartItem.amount,
@@ -46,30 +45,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeCartItem(productId: string, removeAmount: number) {
+  function removeCartItem(id: string, removeAmount: number) {
     setCartItems((prevCartItems) => {
       const currentCartItem = prevCartItems.find(
-        (currentItem) => currentItem.productId === productId,
+        (currentItem) => currentItem.id === id,
       );
       if (!currentCartItem) return prevCartItems;
 
       if (currentCartItem.amount - removeAmount < 1)
-        return prevCartItems.filter(
-          (currentItem) => currentItem.productId !== productId,
-        );
+        return prevCartItems.filter((currentItem) => currentItem.id !== id);
 
       return prevCartItems.map((currentItem) =>
-        currentItem.productId === productId
+        currentItem.id === id
           ? { ...currentItem, amount: currentItem.amount - removeAmount }
           : currentItem,
       );
     });
   }
 
-  function setCartItemAmount(productId: string, newAmount: number) {
+  function setCartItemAmount(id: string, newAmount: number) {
     setCartItems((prevCartItems) =>
       prevCartItems.map((prevCartItem) =>
-        prevCartItem.productId === productId
+        prevCartItem.id === id
           ? { ...prevCartItem, amount: newAmount }
           : prevCartItem,
       ),
@@ -87,42 +84,36 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   }
 
-  function calcCartItemTotal(productId: string) {
-    const cartItem = cartItems.find(
-      (cartItem) => cartItem.productId === productId,
-    );
+  function calcCartItemTotal(id: string) {
+    const cartItem = cartItems.find((cartItem) => cartItem.id === id);
     if (!cartItem) return 0;
 
     return cartItem.price * cartItem.amount;
   }
 
-  function incrementCartItemAmount(productId: string) {
+  function incrementCartItemAmount(id: string) {
     setCartItems((cartItems) => {
-      const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.productId === productId,
-      );
+      const existingCartItem = cartItems.find((cartItem) => cartItem.id === id);
       if (!existingCartItem) return cartItems;
 
       return cartItems.map((cartItem) =>
-        cartItem.productId === productId
+        cartItem.id === id
           ? { ...cartItem, amount: cartItem.amount + 1 }
           : cartItem,
       );
     });
   }
 
-  function decrementCartItemAmount(productId: string) {
+  function decrementCartItemAmount(id: string) {
     setCartItems((cartItems) => {
-      const existingCartItem = cartItems.find(
-        (cartItem) => cartItem.productId === productId,
-      );
+      const existingCartItem = cartItems.find((cartItem) => cartItem.id === id);
       if (!existingCartItem) return cartItems;
 
       if (existingCartItem.amount - 1 <= 0)
-        return cartItems.filter((cartItem) => cartItem.productId !== productId);
+        return cartItems.filter((cartItem) => cartItem.id !== id);
 
       return cartItems.map((cartItem) =>
-        cartItem.productId === productId
+        cartItem.id === id
           ? { ...cartItem, amount: cartItem.amount - 1 }
           : cartItem,
       );

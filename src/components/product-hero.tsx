@@ -1,4 +1,3 @@
-import { type TProductData } from "@/data/products-data";
 import { cn, urlFor } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -50,7 +49,13 @@ export default function ProductHero({
 
             {productPage ? (
               <>
-                <strong>$ {product.price}</strong>
+                <strong>
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0,
+                  }).format(product.price)}
+                </strong>
                 <ProductAddToCart product={product} />
               </>
             ) : (

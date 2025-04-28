@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
-import { TProductData } from "@/data/products-data";
 import { TProductDocument } from "@/types/productDocumentType";
 
 export default function ProductAddToCart({
@@ -17,9 +16,9 @@ export default function ProductAddToCart({
       <Button
         onClick={() =>
           addCartItem({
-            productId: product.slug.current,
+            id: product.slug.current,
             amount: 1,
-            title: product.cartName,
+            name: product.cartName,
             price: product.price,
             image: product.cartThumbnail,
           })
