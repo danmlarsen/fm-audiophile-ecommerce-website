@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/lib/utils";
-import { type TProductAlternatives } from "@/types/productDocumentType";
+import { type TProductAlternative } from "@/types/productDocumentType";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductAlternatives({
   alternatives,
 }: {
-  alternatives: TProductAlternatives;
+  alternatives: TProductAlternative[];
 }) {
   if (!alternatives || alternatives.length === 0) return null;
 

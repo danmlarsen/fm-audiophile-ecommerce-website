@@ -26,8 +26,6 @@ export default async function ProductPage({
 
   if (!product) notFound();
 
-  console.log(product);
-
   return (
     <>
       <ProductHero product={product} productPage={true} />

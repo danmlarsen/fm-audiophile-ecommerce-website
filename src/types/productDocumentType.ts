@@ -16,12 +16,12 @@ export type TProductDocument = {
   featuresDescription: PortableTextBlock;
   includedItems: { name: string; amount: number }[];
   galleryImages: string[];
-  alternatives: TProductAlternatives;
+  alternatives: TProductAlternative[];
 };
 
-export type TProductAlternatives = {
+export type TProductAlternative = {
   name: string;
   slug: { current: string };
   mainImage: string;
   shortName: string;
-}[];
+};

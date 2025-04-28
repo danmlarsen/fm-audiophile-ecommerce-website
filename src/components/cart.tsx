@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/utils";
 
 export default function Cart() {
-  const { cartItems, resetCart, calcTotal, calcCartItemTotal } = useCart();
+  const { cartItems, resetCart, calcTotal } = useCart();
 
   if (cartItems.length === 0)
     return (
