@@ -5,6 +5,7 @@ import SvgCircles from "@/assets/images/pattern-circles.svg";
 
 import Image from "next/image";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function FeaturedProducts() {
   return (
@@ -27,7 +28,9 @@ export default function FeaturedProducts() {
               Upgrade to premium speakers that are phenomenally built to deliver
               truly remarkable sound.
             </p>
-            <Button variant="secondary">See product</Button>
+            <Button variant="secondary" asChild>
+              <Link href="/product/zx9-speaker">See product</Link>
+            </Button>
           </div>
         </div>
 
@@ -40,7 +43,9 @@ export default function FeaturedProducts() {
           />
           <div className="relative space-y-8">
             <h2 className="text-4xl font-bold uppercase">ZX7 Speaker</h2>
-            <Button variant="outline">See product</Button>
+            <Button variant="outline" asChild>
+              <Link href="/product/zx7-speaker">See product</Link>
+            </Button>
           </div>
         </div>
 
@@ -55,7 +60,9 @@ export default function FeaturedProducts() {
           </div>
           <div className="flex flex-col items-start justify-center space-y-8 rounded-lg bg-gray-200 px-24">
             <h2 className="text-4xl font-bold uppercase">YX1 Earphones</h2>
-            <Button variant="outline">See product</Button>
+            <Button variant="outline" asChild>
+              <Link href="/product/yx1-wireless-earphones">See product</Link>
+            </Button>
           </div>
         </div>
       </div>

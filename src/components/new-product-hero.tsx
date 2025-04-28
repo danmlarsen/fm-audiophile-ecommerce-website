@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 
 import ImageHero from "@/assets/images/image-hero.png";
+import Link from "next/link";
 
 export default function NewProductHero() {
   return (
@@ -21,7 +22,9 @@ export default function NewProductHero() {
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.
           </p>
-          <Button>See product</Button>
+          <Button asChild>
+            <Link href="/product/xx99-mark-ii-headphones">See product</Link>
+          </Button>
         </div>
         <div></div>
       </div>
