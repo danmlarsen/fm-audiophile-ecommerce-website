@@ -22,7 +22,11 @@ export default function CartButton() {
           </div>
         )}
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[377px] p-8">
+      <DropdownMenuContent
+        className="w-[377px] p-8"
+        align="end"
+        sideOffset={70}
+      >
         <Cart />
       </DropdownMenuContent>
     </DropdownMenu>

@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import ProductAlternatives from "./[slug]/product-alternatives";
 import ProductCategories from "@/components/product-categories";
 import BestAudioGear from "@/components/best-audio-gear";
 
@@ -20,7 +19,6 @@ export default function ProductLayout({
       </Button>
       <div className="space-y-40">
         {children}
-        <ProductAlternatives />
         <ProductCategories />
         <BestAudioGear />
       </div>

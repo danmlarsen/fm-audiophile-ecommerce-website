@@ -1,12 +1,16 @@
 import ProductHero from "@/components/product-hero";
-import { productsData } from "@/data/products-data";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 import ProductFeatures from "./product-features";
 import ProductGallery from "./product-gallery";
+import { defineQuery, type SanityDocument } from "next-sanity";
+import { client } from "@/sanity/client";
+import { type TProductDocument } from "@/types/productDocumentType";
 import ProductAlternatives from "./product-alternatives";
-import ProductCategories from "@/components/product-categories";
+
+const PRODUCTS_QUERY = defineQuery(
+  `*[_type == 'product' && slug.current == $slug][0]{..., alternatives[0..2]->{name,slug,mainImage,shortName}}`,
+);
 
 export default async function ProductPage({
   params,
@@ -15,7 +19,10 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
 
-  const product = productsData.find((product) => product.slug === slug);
+  const product = await client.fetch<SanityDocument<TProductDocument>>(
+    PRODUCTS_QUERY,
+    { slug },
+  );
 
   if (!product) notFound();
 
@@ -24,6 +31,7 @@ export default async function ProductPage({
       <ProductHero product={product} productPage={true} />
       <ProductFeatures product={product} />
       <ProductGallery product={product} />
+      <ProductAlternatives alternatives={product.alternatives} />
     </>
   );
 }
