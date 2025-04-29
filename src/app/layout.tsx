@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/ui/header";
 import Footer from "@/components/footer";
 import { CartProvider } from "@/context/cart-context";
+import { Toaster } from "@/components/ui/sonner";
 
 const manropeSans = Manrope({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
+          <Toaster position="top-right" />
         </CartProvider>
       </body>
     </html>
