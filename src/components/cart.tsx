@@ -1,11 +1,12 @@
 "use client";
 
-import { useCart } from "@/context/cart-context";
+import { type TCartItem, useCart } from "@/context/cart-context";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Cart() {
   const { cartItems, resetCart, calcTotal } = useCart();
@@ -26,42 +27,7 @@ export default function Cart() {
         </Button>
       </div>
 
-      <ul className="space-y-6">
-        {cartItems.map((cartItem) => {
-          const imageUrl = cartItem.image
-            ? urlFor(cartItem.image)?.width(64).height(64).url()
-            : null;
-
-          return (
-            <li
-              key={cartItem.id}
-              className="grid grid-cols-[auto_1fr_auto] items-center gap-4"
-            >
-              <div className="relative size-16">
-                <Image
-                  src={imageUrl || "https://placehold.co/64x64/png"}
-                  alt={`Image of ${cartItem.name}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <strong>{cartItem.name}</strong>
-                <div>
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 0,
-                  }).format(cartItem.price)}
-                </div>
-              </div>
-              <div>
-                <CartItemAmountInput id={cartItem.id} />
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <CartItemList />
 
       <div className="flex items-center justify-between">
         <span className="uppercase">Total</span>
@@ -74,9 +40,64 @@ export default function Cart() {
         </strong>
       </div>
 
-      <Button className="w-full">Checkout</Button>
+      <Button className="w-full" asChild>
+        <Link href="/checkout">Checkout</Link>
+      </Button>
     </div>
   );
+}
+
+export function CartItemList({ summary = false }: { summary?: boolean }) {
+  const { cartItems } = useCart();
+
+  return (
+    <ul className="space-y-6">
+      {cartItems.map((cartItem) => (
+        <CartItem key={cartItem.id} cartItem={cartItem} summary={summary} />
+      ))}
+    </ul>
+  );
+}
+
+export function CartItem({
+  cartItem,
+  summary,
+}: {
+  cartItem: TCartItem;
+  summary: boolean;
+}) {
+  {
+    const imageUrl = cartItem.image
+      ? urlFor(cartItem.image)?.width(64).height(64).url()
+      : null;
+
+    return (
+      <li className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
+        <div className="relative size-16">
+          <Image
+            src={imageUrl || "https://placehold.co/64x64/png"}
+            alt={`Image of ${cartItem.name}`}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <strong>{cartItem.name}</strong>
+          <div>
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+              maximumFractionDigits: 0,
+            }).format(cartItem.price)}
+          </div>
+        </div>
+        <div>
+          {!!summary && <span>x{cartItem.amount}</span>}
+          {!summary && <CartItemAmountInput id={cartItem.id} />}
+        </div>
+      </li>
+    );
+  }
 }
 
 function CartItemAmountInput({ id }: { id: string }) {

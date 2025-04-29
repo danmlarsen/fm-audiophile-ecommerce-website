@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 
-type TCartItem = {
+export type TCartItem = {
   id: string;
   amount: number;
   name: string;
