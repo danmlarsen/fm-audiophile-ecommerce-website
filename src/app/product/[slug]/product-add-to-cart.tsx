@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart-context";
+import { useCart } from "@/components/cart/cart-context";
 import { TProductDocument } from "@/types/productDocumentType";
 import { toast } from "sonner";
 

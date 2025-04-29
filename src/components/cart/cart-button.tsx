@@ -1,13 +1,13 @@
 "use client";
 
-import { useCart } from "@/context/cart-context";
+import { useCart } from "@/components/cart/cart-context";
 import Cart from "./cart";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import IconCart from "./ui/icons/IconCart";
+} from "../ui/dropdown-menu";
+import IconCart from "../ui/icons/IconCart";
 
 export default function CartButton() {
   const { cartItems } = useCart();

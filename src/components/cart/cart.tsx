@@ -1,9 +1,9 @@
 "use client";
 
-import { type TCartItem, useCart } from "@/context/cart-context";
-import { Button } from "./ui/button";
+import { type TCartItem, useCart } from "@/components/cart/cart-context";
+import { Button } from "../ui/button";
 import Image from "next/image";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/utils";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Logo from "./logo";
 import Navigation from "../navigation";
-import CartButton from "../cart-button";
+import CartButton from "../cart/cart-button";
 
 export default function Header({
   className,

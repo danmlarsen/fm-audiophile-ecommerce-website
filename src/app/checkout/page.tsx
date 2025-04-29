@@ -1,4 +1,4 @@
-import CartSummary from "./cart-summary";
+import CartSummary from "../../components/cart/cart-summary";
 
 export default function CheckoutPage() {
   return (

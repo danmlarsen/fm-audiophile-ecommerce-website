@@ -1,12 +1,14 @@
 "use client";
 
-import { CartItem, CartItemList } from "@/components/cart";
+import { CartItemList } from "@/components/cart/cart";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart-context";
+import { useCart } from "@/components/cart/cart-context";
 import { formatPrice } from "@/lib/utils";
 
 export default function CartSummary() {
-  const { calcTotal } = useCart();
+  const { cartItems, calcTotal } = useCart();
+
+  if (cartItems.length === 0) return null;
 
   const totalPrice = calcTotal();
   const shippingPrice = 50;
