@@ -6,23 +6,25 @@ import CartSummary from "@/components/cart/cart-summary";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import CheckoutForm from "./checkout-form";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import CheckoutConfirmation from "./checkout-confirmation";
 
 export const checkoutFormSchema = z
   .object({
     fullName: z.string().min(2).max(50),
     email: z.string().email(),
-    phone: z.string(),
-    address: z.string(),
-    zipCode: z.string(),
-    city: z.string(),
-    country: z.string(),
+    phone: z.string().min(5).max(50),
+    address: z.string().min(2).max(50),
+    zipCode: z.string().min(2).max(50),
+    city: z.string().min(2).max(50),
+    country: z.string().min(2).max(50),
     paymentMethod: z.enum(["eMoney", "cod"]),
     eMoneyNumber: z.string(),
     eMoneyPin: z.string(),
   })
   .superRefine((ctx) => {
     if (
-      ctx.paymentMethod === "cod" &&
+      ctx.paymentMethod === "eMoney" &&
       (ctx.eMoneyNumber.length === 0 || ctx.eMoneyPin.length === 0)
     )
       return false;
@@ -51,19 +53,24 @@ export default function CheckoutSection() {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-[1fr_350px] items-start gap-8"
-      >
-        <div className="bg-secondary rounded-lg px-12 py-14">
-          <h1>Checkout</h1>
-          <CheckoutForm form={form} />
-        </div>
-        <aside className="bg-secondary p-8">
-          <CartSummary />
-        </aside>
-      </form>
-    </Form>
+    <>
+      <CheckoutConfirmation isSubmitted={form.formState.isSubmitSuccessful} />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid items-start gap-8 lg:grid-cols-[1fr_350px]"
+        >
+          <Card className="px-12 py-14">
+            <CardHeader>
+              <CardTitle className="text-4xl uppercase">Checkout</CardTitle>
+            </CardHeader>
+            <CheckoutForm form={form} />
+          </Card>
+          <Card className="p-8">
+            <CartSummary />
+          </Card>
+        </form>
+      </Form>
+    </>
   );
 }

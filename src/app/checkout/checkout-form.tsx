@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import IconCashOnDelivery from "@/components/ui/icons/IconCashOnDelivery";
 
 export default function CheckoutForm({
   form,
@@ -21,9 +22,11 @@ export default function CheckoutForm({
 
   return (
     <div className="space-y-14">
-      <div>
-        <h2>Billing details</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-4">
+        <h2 className="text-primary text-sm font-bold tracking-[0.93px] uppercase">
+          Billing details
+        </h2>
+        <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
           <FormField
             control={form.control}
             name="fullName"
@@ -65,14 +68,16 @@ export default function CheckoutForm({
         </div>
       </div>
 
-      <div>
-        <h2>Shipping info</h2>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-4">
+        <h2 className="text-primary text-sm font-bold tracking-[0.93px] uppercase">
+          Shipping info
+        </h2>
+        <div className="grid gap-x-4 gap-y-6 md:grid-cols-2">
           <FormField
             control={form.control}
             name="address"
             render={({ field }) => (
-              <FormItem className="col-span-2">
+              <FormItem className="md:col-span-2">
                 <FormLabel>Address</FormLabel>
                 <FormControl>
                   <Input placeholder="1137 Williams Avenue" {...field} />
@@ -122,64 +127,84 @@ export default function CheckoutForm({
         </div>
       </div>
 
-      <div>
-        <h2>Payment details</h2>
-        <FormField
-          control={form.control}
-          name="paymentMethod"
-          render={({ field }) => (
-            <FormItem className="grid grid-cols-2 items-start">
-              <FormLabel className="row-span-2">Payment method</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormItem className="flex items-center gap-4">
+      <div className="space-y-4">
+        <h2 className="text-primary text-sm font-bold tracking-[0.93px] uppercase">
+          Payment details
+        </h2>
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="paymentMethod"
+            render={({ field }) => (
+              <FormItem className="grid items-start md:grid-cols-2">
+                <FormLabel className="row-span-2">Payment method</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormItem className="has-[:checked]:border-primary hover:border-primary flex items-center gap-4 rounded-md border border-gray-300 p-4">
+                      <FormControl>
+                        <RadioGroupItem value="eMoney" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">e-Money</FormLabel>
+                    </FormItem>
+                    <FormItem className="has-[:checked]:border-primary hover:border-primary flex items-center gap-4 rounded-md border border-gray-300 p-4">
+                      <FormControl>
+                        <RadioGroupItem value="cod" />
+                      </FormControl>
+                      <FormLabel className="cursor-pointer">
+                        Cash on Delivery
+                      </FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          {paymentMethodValue === "eMoney" && (
+            <div className="grid gap-4 md:grid-cols-2">
+              <FormField
+                control={form.control}
+                name="eMoneyNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>e-Money Number</FormLabel>
                     <FormControl>
-                      <RadioGroupItem value="eMoney" />
+                      <Input placeholder="238521993" {...field} />
                     </FormControl>
-                    <FormLabel>e-Money</FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center gap-4">
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="eMoneyPin"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>e-Money PIN</FormLabel>
                     <FormControl>
-                      <RadioGroupItem value="cod" />
+                      <Input placeholder="6891" {...field} />
                     </FormControl>
-                    <FormLabel>Cash on Delivery</FormLabel>
                   </FormItem>
-                </RadioGroup>
-              </FormControl>
-            </FormItem>
+                )}
+              />
+            </div>
           )}
-        />
-        {paymentMethodValue === "eMoney" && (
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="eMoneyNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>e-Money Number</FormLabel>
-                  <FormControl>
-                    <Input placeholder="238521993" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="eMoneyPin"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>e-Money PIN</FormLabel>
-                  <FormControl>
-                    <Input placeholder="6891" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-        )}
+
+          {paymentMethodValue === "cod" && (
+            <div className="flex items-center gap-8">
+              <div>
+                <IconCashOnDelivery />
+              </div>
+              <p>
+                The ‘Cash on Delivery’ option enables you to pay in cash when
+                our delivery courier arrives at your residence. Just make sure
+                your address is correct so that your order will not be
+                cancelled.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
