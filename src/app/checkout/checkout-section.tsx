@@ -8,6 +8,7 @@ import { Form } from "@/components/ui/form";
 import CheckoutForm from "./checkout-form";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import CheckoutConfirmation from "./checkout-confirmation";
+import { useCart } from "@/components/cart/cart-context";
 
 export const checkoutFormSchema = z
   .object({
@@ -32,6 +33,8 @@ export const checkoutFormSchema = z
   });
 
 export default function CheckoutSection() {
+  const { cartItems } = useCart();
+
   const form = useForm<z.infer<typeof checkoutFormSchema>>({
     resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
@@ -48,29 +51,29 @@ export default function CheckoutSection() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof checkoutFormSchema>) {
-    console.log(values);
-  }
+  function onSubmit(values: z.infer<typeof checkoutFormSchema>) {}
 
   return (
     <>
       <CheckoutConfirmation isSubmitted={form.formState.isSubmitSuccessful} />
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="grid items-start gap-8 lg:grid-cols-[1fr_350px]"
-        >
-          <Card className="px-12 py-14">
-            <CardHeader>
-              <CardTitle className="text-4xl uppercase">Checkout</CardTitle>
-            </CardHeader>
-            <CheckoutForm form={form} />
-          </Card>
-          <Card className="p-8">
-            <CartSummary />
-          </Card>
-        </form>
-      </Form>
+      {cartItems.length > 0 && (
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid items-start gap-8 lg:grid-cols-[1fr_350px]"
+          >
+            <Card className="px-12 py-14">
+              <CardHeader>
+                <CardTitle className="text-4xl uppercase">Checkout</CardTitle>
+              </CardHeader>
+              <CheckoutForm form={form} />
+            </Card>
+            <Card className="p-8">
+              <CartSummary />
+            </Card>
+          </form>
+        </Form>
+      )}
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function RootLayout({
               </div>
             </div>
           </div>
-          <Toaster position="top-right" />
+          <Toaster position="top-right" offset={{ top: "150px" }} />
         </CartProvider>
       </body>
     </html>

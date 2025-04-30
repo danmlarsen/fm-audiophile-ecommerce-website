@@ -47,15 +47,38 @@ export default function Cart() {
   );
 }
 
-export function CartItemList({ summary = false }: { summary?: boolean }) {
+export function CartItemList({
+  summary = false,
+  collapsable = false,
+}: {
+  summary?: boolean;
+  collapsable?: boolean;
+}) {
   const { cartItems } = useCart();
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const filteredCartItems =
+    collapsable && isCollapsed ? cartItems.slice(0, 1) : cartItems;
 
   return (
-    <ul className="space-y-6">
-      {cartItems.map((cartItem) => (
-        <CartItem key={cartItem.id} cartItem={cartItem} summary={summary} />
-      ))}
-    </ul>
+    <>
+      <ul className="space-y-6">
+        {filteredCartItems.map((cartItem) => (
+          <CartItem key={cartItem.id} cartItem={cartItem} summary={summary} />
+        ))}
+      </ul>
+      {collapsable && (
+        <div className="border-t border-[#979797]/10 py-2 text-center">
+          <Button
+            variant="ghost"
+            onClick={() => setIsCollapsed((prevState) => !prevState)}
+          >
+            {isCollapsed && <>and {cartItems.length - 1} other item(s)</>}
+            {!isCollapsed && <>View less</>}
+          </Button>
+        </div>
+      )}
+    </>
   );
 }
 
