@@ -4,8 +4,16 @@ import ImageBestGear from "@/assets/images/image-best-gear.jpg";
 
 export default function BestAudioGear() {
   return (
-    <section className="grid h-[588px] grid-cols-2 gap-40">
-      <div className="flex flex-col justify-center">
+    <section className="grid gap-10 lg:h-[588px] lg:grid-cols-2 lg:gap-40">
+      <div className="relative min-h-[300px] overflow-hidden rounded-md">
+        <Image
+          src={ImageBestGear}
+          alt="Man with headphones"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="flex flex-col justify-center text-center lg:text-start">
         <h2 className="text-[40px] font-bold uppercase">
           Bringing you the <span className="text-primary">best</span> audio gear
         </h2>
@@ -17,14 +25,6 @@ export default function BestAudioGear() {
           store to meet some of the fantastic people who make Audiophile the
           best place to buy your portable audio equipment.
         </p>
-      </div>
-      <div className="relative overflow-hidden rounded-md">
-        <Image
-          src={ImageBestGear}
-          alt="Man with headphones"
-          fill
-          className="object-cover"
-        />
       </div>
     </section>
   );

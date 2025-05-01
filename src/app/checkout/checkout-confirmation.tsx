@@ -16,7 +16,7 @@ export default function CheckoutConfirmation({
   isSubmitted: boolean;
 }) {
   const router = useRouter();
-  const { cartItems, resetCart } = useCart();
+  const { resetCart } = useCart();
 
   return (
     <Dialog open={isSubmitted}>

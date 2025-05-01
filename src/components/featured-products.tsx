@@ -1,6 +1,6 @@
-import ImageSpeakerZx9 from "@/assets/images/image-speaker-zx9.png";
-import ImageSpeakerZx7 from "@/assets/images/image-speaker-zx7.jpg";
-import ImageEarphonesYx1 from "@/assets/images/image-earphones-yx1.jpg";
+import ImageSpeakerZx9Desktop from "@/assets/images/home/desktop/image-speaker-zx9.png";
+import ImageSpeakerZx7Desktop from "@/assets/images/home/desktop/image-speaker-zx7.jpg";
+import ImageEarphonesYx1Desktop from "@/assets/images/home/desktop/image-earphones-yx1.jpg";
 import SvgCircles from "@/assets/images/pattern-circles.svg";
 
 import Image from "next/image";
@@ -11,18 +11,18 @@ export default function FeaturedProducts() {
   return (
     <section>
       <div className="space-y-12">
-        <div className="bg-primary relative flex h-[560px] items-center justify-end overflow-hidden rounded-lg px-24 text-white">
+        <div className="bg-primary relative flex flex-col items-center gap-8 overflow-hidden rounded-lg px-24 py-14 text-white lg:h-[560px] lg:flex-row lg:justify-end">
           <Image
             src={SvgCircles}
             alt="Circles"
-            className="pointer-events-none absolute -bottom-80 -left-32"
+            className="pointer-events-none absolute -top-20 w-[558px] max-w-none lg:-bottom-80 lg:-left-32"
           />
           <Image
-            src={ImageSpeakerZx9}
+            src={ImageSpeakerZx9Desktop}
             alt="ZX9 Speaker"
-            className="pointer-events-none absolute -bottom-5 left-40 w-[375px] object-cover"
+            className="pointer-events-none relative w-[207px] object-cover lg:absolute lg:-bottom-5 lg:left-40 lg:w-[375px]"
           />
-          <div className="max-w-[349px] space-y-6">
+          <div className="max-w-[349px] space-y-6 text-center">
             <h2 className="text-6xl font-bold uppercase">ZX9 Speaker</h2>
             <p>
               Upgrade to premium speakers that are phenomenally built to deliver
@@ -36,7 +36,7 @@ export default function FeaturedProducts() {
 
         <div className="relative flex h-[320px] items-center overflow-hidden rounded-lg px-24">
           <Image
-            src={ImageSpeakerZx7}
+            src={ImageSpeakerZx7Desktop}
             alt="ZX7 Speaker"
             fill
             className="object-cover"
@@ -49,16 +49,16 @@ export default function FeaturedProducts() {
           </div>
         </div>
 
-        <div className="grid h-[320px] grid-cols-2 gap-8">
-          <div className="relative overflow-hidden rounded-lg">
+        <div className="grid gap-8 md:h-[320px] md:grid-cols-2">
+          <div className="relative min-h-[200px] overflow-hidden rounded-lg">
             <Image
-              src={ImageEarphonesYx1}
+              src={ImageEarphonesYx1Desktop}
               alt="YX1 Earphones"
               fill
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col items-start justify-center space-y-8 rounded-lg bg-gray-200 px-24">
+          <div className="flex min-h-[200px] flex-col items-start justify-center space-y-8 rounded-lg bg-gray-200 px-24">
             <h2 className="text-4xl font-bold uppercase">YX1 Earphones</h2>
             <Button variant="outline" asChild>
               <Link href="/product/yx1-wireless-earphones">See product</Link>

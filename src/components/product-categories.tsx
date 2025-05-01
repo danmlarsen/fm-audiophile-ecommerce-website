@@ -27,7 +27,7 @@ const categoryMockData = [
 export default function ProductCategories() {
   return (
     <section>
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid gap-8 md:grid-cols-3">
         {categoryMockData.map((category) => (
           <div
             key={category.title}

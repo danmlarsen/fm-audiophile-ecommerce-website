@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const navData = [
@@ -19,10 +20,13 @@ const navData = [
   },
 ];
 
-export default function Navigation() {
+export default function Navigation({
+  className,
+  ...props
+}: React.ComponentProps<"nav">) {
   return (
-    <nav>
-      <ul className="flex items-center gap-8 text-[13px] font-bold tracking-[2px] uppercase">
+    <nav className={cn("", className)} {...props}>
+      <ul className="flex flex-col items-center gap-8 text-[13px] font-bold tracking-[2px] uppercase md:flex-row">
         {navData.map(({ title, href }) => (
           <li key={title}>
             <Link
