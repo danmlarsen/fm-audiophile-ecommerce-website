@@ -3,10 +3,10 @@
 import { type TCartItem, useCart } from "@/components/cart/cart-context";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { urlFor } from "@/lib/utils";
 import Link from "next/link";
-import { CartItemAmountInput } from "./cart-item-amount-input";
+import { AmountInput } from "../ui/amount-input";
 
 export default function Cart() {
   const { cartItems, resetCart, calcTotal } = useCart();
@@ -94,6 +94,8 @@ export function CartItem({
       ? urlFor(cartItem.image)?.width(64).height(64).url()
       : null;
 
+    const { setCartItemAmount } = useCart();
+
     return (
       <li className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
         <div className="relative size-16">
@@ -116,7 +118,16 @@ export function CartItem({
         </div>
         <div>
           {!!summary && <span>x{cartItem.amount}</span>}
-          {!summary && <CartItemAmountInput id={cartItem.id} />}
+          {!summary && (
+            <AmountInput
+              amount={cartItem.amount}
+              onAmountChanged={(newAmount) => {
+                if (newAmount > 0 && newAmount <= 9) {
+                  setCartItemAmount(cartItem.id, newAmount);
+                }
+              }}
+            />
+          )}
         </div>
       </li>
     );
