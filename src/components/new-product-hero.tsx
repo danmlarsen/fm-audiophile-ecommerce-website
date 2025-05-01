@@ -7,13 +7,13 @@ import Link from "next/link";
 export default function NewProductHero() {
   return (
     <section className="bg-[#141414] px-6 text-white">
-      <div className="relative mx-auto grid h-[632px] max-w-6xl grid-cols-2 overflow-hidden">
+      <div className="relative mx-auto grid max-w-6xl grid-cols-2 justify-center overflow-hidden lg:h-[632px] lg:justify-start">
         <Image
           src={ImageHero}
           alt="Headphones"
-          className="absolute -top-24 right-0 object-cover"
+          className="absolute inset-x-0 -top-24 mx-auto object-cover lg:left-auto lg:mx-0"
         />
-        <div className="relative flex max-w-[398px] flex-col items-start justify-center space-y-6">
+        <div className="relative col-span-2 mx-auto flex flex-col items-center justify-center space-y-6 py-28 text-center md:max-w-[398px] lg:col-span-1 lg:mx-0 lg:items-start lg:text-left">
           <small className="text-sm font-normal tracking-[10px] text-white/50 uppercase">
             New Product
           </small>

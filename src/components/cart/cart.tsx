@@ -3,10 +3,10 @@
 import { type TCartItem, useCart } from "@/components/cart/cart-context";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { Input } from "../ui/input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { urlFor } from "@/lib/utils";
 import Link from "next/link";
+import { CartItemAmountInput } from "./cart-item-amount-input";
 
 export default function Cart() {
   const { cartItems, resetCart, calcTotal } = useCart();
@@ -121,54 +121,4 @@ export function CartItem({
       </li>
     );
   }
-}
-
-function CartItemAmountInput({ id }: { id: string }) {
-  const {
-    cartItems,
-    incrementCartItemAmount,
-    decrementCartItemAmount,
-    setCartItemAmount,
-  } = useCart();
-
-  const cartItem = cartItems.find((cartItem) => cartItem.id === id);
-
-  if (!cartItem) return null;
-
-  const [amount, setAmount] = useState<number | null>(cartItem.amount);
-
-  useEffect(() => {
-    setAmount(cartItem.amount);
-  }, [cartItem.amount]);
-
-  useEffect(() => {
-    if (amount && !isNaN(amount) && amount > 0 && amount <= 9) {
-      setCartItemAmount(id, amount);
-    }
-  }, [amount]);
-
-  return (
-    <div className="grid w-[120px] grid-cols-3 items-center">
-      <Button
-        onClick={() => decrementCartItemAmount(id)}
-        className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
-      >
-        -
-      </Button>
-      <Input
-        type="input"
-        min={0}
-        max={9}
-        value={amount?.toString()}
-        onChange={(e) => setAmount(+e.target.value)}
-        className="h-full w-[40px] border-0 text-center shadow-none focus-visible:ring-0"
-      />
-      <Button
-        onClick={() => incrementCartItemAmount(id)}
-        className="text-muted bg-transparent p-4 shadow-none hover:bg-transparent hover:text-black"
-      >
-        +
-      </Button>
-    </div>
-  );
 }

@@ -21,8 +21,13 @@ export default function ProductHero({
 
   return (
     <section>
-      <div className="grid h-[560px] grid-cols-2 gap-6">
-        <div className={cn("relative", reverse && "order-1")}>
+      <div className="grid gap-6 lg:h-[560px] lg:grid-cols-2">
+        <div
+          className={cn(
+            "relative h-[352px] lg:h-full",
+            reverse && "lg:order-1",
+          )}
+        >
           <Image
             src={productImageUrl || "https://placehold.co/560x560/png"}
             alt={`Image of ${product.name}`}
@@ -32,8 +37,8 @@ export default function ProductHero({
         </div>
         <div
           className={cn(
-            "flex items-center justify-end",
-            reverse && "justify-start",
+            "flex items-center justify-center text-center lg:justify-end lg:text-start",
+            reverse && "lg:justify-start",
           )}
         >
           <div className="max-w-[445px] space-y-6">
