@@ -12,24 +12,36 @@ import { useCart } from "@/components/cart/cart-context";
 
 export const checkoutFormSchema = z
   .object({
-    fullName: z.string().min(2).max(50),
-    email: z.string().email(),
-    phone: z.string().min(5).max(50),
-    address: z.string().min(2).max(50),
-    zipCode: z.string().min(2).max(50),
-    city: z.string().min(2).max(50),
-    country: z.string().min(2).max(50),
+    fullName: z.string().min(2, "Name too short").max(50, "Max 50 characters"),
+    email: z.string().email("Wrong format").max(50, "Max 50 characters"),
+    phone: z.string().min(5, "Number too short").max(50, "Max 50 characters"),
+    address: z.string().min(2, "Required").max(50, "Max 50 characters"),
+    zipCode: z.string().min(2, "Required").max(50, "Max 50 characters"),
+    city: z.string().min(2, "Required").max(50, "Max 50 characters"),
+    country: z.string().min(2, "Required").max(50, "Max 50 characters"),
     paymentMethod: z.enum(["eMoney", "cod"]),
     eMoneyNumber: z.string(),
     eMoneyPin: z.string(),
   })
-  .superRefine((ctx) => {
+  .superRefine((data, ctx) => {
     if (
-      ctx.paymentMethod === "eMoney" &&
-      (ctx.eMoneyNumber.length === 0 || ctx.eMoneyPin.length === 0)
-    )
-      return false;
-    return true;
+      data.paymentMethod === "eMoney" &&
+      (data.eMoneyNumber.length === 0 || data.eMoneyNumber.length > 50)
+    ) {
+      ctx.addIssue({
+        message: "Invalid number",
+        path: ["eMoneyNumber"],
+        code: "custom",
+      });
+    }
+
+    if (data.paymentMethod === "eMoney" && data.eMoneyPin.length !== 4) {
+      ctx.addIssue({
+        message: "Invalid PIN",
+        path: ["eMoneyPin"],
+        code: "custom",
+      });
+    }
   });
 
 export default function CheckoutSection() {

@@ -20,20 +20,20 @@ export default function CheckoutConfirmation({
 
   return (
     <Dialog open={isSubmitted}>
-      <DialogContent className="space-y-8 p-12 lg:max-w-[540px]">
+      <DialogContent className="space-y-8 p-12 md:max-w-[540px]">
         <DialogHeader className="space-y-8">
           <IconOrderConfirmation />
-          <DialogTitle className="max-w-[284px] text-3xl">
+          <DialogTitle className="max-w-[284px] text-start text-3xl">
             Thank you for your order
           </DialogTitle>
         </DialogHeader>
 
         <p>You will receive an email confirmation shortly.</p>
-        <div className="grid min-h-[140px] grid-cols-[1fr_auto] overflow-hidden rounded-lg">
+        <div className="grid min-h-[140px] overflow-hidden rounded-lg md:grid-cols-[1fr_auto]">
           <div className="bg-secondary p-4">
             <CartItemList summary={true} collapsable={true} />
           </div>
-          <div className="flex w-[198px] flex-col justify-end bg-black px-8 py-10 text-white">
+          <div className="flex flex-col justify-end bg-black px-8 py-10 text-white md:w-[198px]">
             <div className="uppercase">Grand total</div>
             <div>$5,446</div>
           </div>
