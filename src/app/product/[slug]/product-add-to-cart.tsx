@@ -12,16 +12,20 @@ export default function ProductAddToCart({
 }: {
   product: TProductDocument;
 }) {
-  const { addCartItem } = useCart();
+  const { cartItems, addCartItem } = useCart();
 
   const [amount, setAmount] = useState(1);
 
+  const cartAmount =
+    cartItems.find((cartItem) => cartItem.id === product.slug.current)
+      ?.amount || 0;
+
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex gap-4">
       <AmountInput
         amount={amount}
         onAmountChanged={(newAmount) => {
-          if (newAmount > 0 && newAmount <= 9) {
+          if (newAmount > 0 && newAmount <= 99) {
             setAmount(newAmount);
           }
         }}
@@ -36,8 +40,9 @@ export default function ProductAddToCart({
             image: product.cartThumbnail,
           });
 
-          toast(`${product.name} added to cart`);
+          toast(`${product.name} x${amount} added to cart`);
         }}
+        disabled={cartAmount + amount > 99}
       >
         Add to cart
       </Button>

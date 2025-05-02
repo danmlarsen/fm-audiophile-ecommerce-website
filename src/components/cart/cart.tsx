@@ -4,7 +4,7 @@ import { type TCartItem, useCart } from "@/components/cart/cart-context";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { urlFor } from "@/lib/utils";
+import { formatPrice, urlFor } from "@/lib/utils";
 import Link from "next/link";
 import { AmountInput } from "../ui/amount-input";
 
@@ -31,13 +31,7 @@ export default function Cart() {
 
       <div className="flex items-center justify-between">
         <span className="uppercase">Total</span>
-        <strong>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 0,
-          }).format(calcTotal())}
-        </strong>
+        <strong>{formatPrice(calcTotal())}</strong>
       </div>
 
       <Button className="w-full" asChild>
@@ -108,13 +102,7 @@ export function CartItem({
         </div>
         <div>
           <strong>{cartItem.name}</strong>
-          <div>
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 0,
-            }).format(cartItem.price)}
-          </div>
+          <div>{formatPrice(cartItem.price)}</div>
         </div>
         <div>
           {!!summary && <span>x{cartItem.amount}</span>}
@@ -122,7 +110,7 @@ export function CartItem({
             <AmountInput
               amount={cartItem.amount}
               onAmountChanged={(newAmount) => {
-                if (newAmount > 0 && newAmount <= 9) {
+                if (newAmount > 0 && newAmount <= 99) {
                   setCartItemAmount(cartItem.id, newAmount);
                 }
               }}

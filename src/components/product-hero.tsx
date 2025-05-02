@@ -1,4 +1,4 @@
-import { cn, urlFor } from "@/lib/utils";
+import { cn, formatPrice, urlFor } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -54,13 +54,7 @@ export default function ProductHero({
 
             {productPage ? (
               <>
-                <strong>
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 0,
-                  }).format(product.price)}
-                </strong>
+                <strong>{formatPrice(product.price)}</strong>
                 <ProductAddToCart product={product} />
               </>
             ) : (
