@@ -26,8 +26,8 @@ export default function RootLayout({
       <body className={`${manropeSans.className} antialiased`}>
         <CartProvider>
           <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
-            <div className="bg-[#141414] px-6 text-white">
-              <div className="mx-auto max-w-6xl py-8">
+            <div className="sticky top-0 left-0 z-50 flex h-[90px] flex-col justify-center bg-[#141414] px-6 text-white">
+              <div className="mx-auto flex w-full max-w-6xl flex-col justify-center">
                 <Header />
               </div>
             </div>

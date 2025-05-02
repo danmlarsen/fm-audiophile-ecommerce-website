@@ -13,14 +13,16 @@ export default function ProductLayout({
   const router = useRouter();
 
   return (
-    <div className="mx-auto mt-32 max-w-6xl space-y-14">
-      <Button variant="ghost" onClick={() => router.back()} className="px-0">
-        Go Back
-      </Button>
-      <div className="space-y-40">
-        {children}
-        <ProductCategories />
-        <BestAudioGear />
+    <div className="px-6">
+      <div className="mx-auto mt-32 max-w-6xl space-y-14">
+        <Button variant="ghost" onClick={() => router.back()} className="px-0">
+          Go Back
+        </Button>
+        <div className="space-y-40">
+          {children}
+          <ProductCategories />
+          <BestAudioGear />
+        </div>
       </div>
     </div>
   );

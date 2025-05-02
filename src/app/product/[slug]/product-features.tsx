@@ -8,16 +8,16 @@ export default function ProductFeatures({
 }) {
   return (
     <section>
-      <div className="grid grid-cols-[635px_auto] gap-6">
+      <div className="grid gap-6 lg:grid-cols-[635px_auto]">
         <div className="space-y-8">
           <h2 className="text-4xl font-bold uppercase">Features</h2>
           <div>
             <PortableText value={product.featuresDescription} />
           </div>
         </div>
-        <div className="w-[350px] space-y-8 justify-self-end">
+        <div className="grid w-full space-y-8 md:w-[549px] md:grid-cols-2 lg:grid-cols-1 lg:justify-self-end">
           <h2 className="text-4xl font-bold uppercase">In the box</h2>
-          <ul>
+          <ul className="md:justify-self-end lg:justify-self-start">
             {product.includedItems.map((item, index) => (
               <li key={index} className="flex gap-4">
                 <span className="text-primary font-bold">{item.amount}x</span>

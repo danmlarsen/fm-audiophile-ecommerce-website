@@ -17,7 +17,9 @@ export default function NewProductHero() {
           <small className="text-sm font-normal tracking-[10px] text-white/50 uppercase">
             New Product
           </small>
-          <h1 className="text-6xl uppercase">XX99 Mark II Headphones</h1>
+          <h1 className="text-4xl uppercase lg:text-6xl">
+            XX99 Mark II Headphones
+          </h1>
           <p className="max-w-[349px] text-white/75">
             Experience natural, lifelike audio and exceptional build quality
             made for the passionate music enthusiast.

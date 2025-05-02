@@ -9,18 +9,17 @@ export default function ProductGallery({
 }) {
   return (
     <section>
-      <div className="grid h-[592px] grid-cols-[auto_635px] gap-8">
+      <div className="grid min-h-[368px] gap-8 md:grid-cols-[1fr_2fr] lg:h-[592px]">
         {product.galleryImages.map((image, index) => {
-          const imageUrl = image
-            ? urlFor(image)?.width(635).height(635).url()
-            : null;
+          const imageUrl = image ? urlFor(image)?.url() : null;
 
           return (
             <div
               key={index}
               className={cn(
-                "relative overflow-hidden rounded-md",
-                index === 2 && "col-start-2 row-span-2 row-start-1",
+                "relative min-h-[174px] overflow-hidden rounded-md",
+                index === 2 &&
+                  "row-span-2 min-h-[368px] md:col-start-2 md:row-start-1",
               )}
             >
               <Image

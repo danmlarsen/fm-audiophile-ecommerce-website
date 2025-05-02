@@ -16,14 +16,17 @@ export default function ProductAlternatives({
       <h2 className="mb-12 text-center text-4xl font-bold uppercase">
         You may also like
       </h2>
-      <div className="grid min-h-[471px] grid-flow-col justify-center gap-8">
+      <div className="grid min-h-[471px] w-full justify-center gap-8 md:grid-cols-3">
         {alternatives.map((alternativeProduct, index) => {
           const productImageUrl = alternativeProduct.mainImage
             ? urlFor(alternativeProduct.mainImage)?.width(560).height(560).url()
             : null;
 
           return (
-            <div key={index} className="w-[350px] space-y-10 text-center">
+            <div
+              key={index}
+              className="w-full max-w-[350px] space-y-10 text-center"
+            >
               <div className="relative h-[318px] overflow-hidden rounded-md">
                 <Image
                   src={productImageUrl || "https://placehold.co/560x560/png"}

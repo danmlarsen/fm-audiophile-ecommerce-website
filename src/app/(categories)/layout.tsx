@@ -10,10 +10,12 @@ export default function CategoriesLayout({
   return (
     <>
       <CategoryHeader />
-      <div className="mx-auto mt-32 max-w-6xl space-y-40">
-        {children}
-        <ProductCategories />
-        <BestAudioGear />
+      <div className="px-6">
+        <div className="mx-auto mt-32 max-w-6xl space-y-40">
+          {children}
+          <ProductCategories />
+          <BestAudioGear />
+        </div>
       </div>
     </>
   );
