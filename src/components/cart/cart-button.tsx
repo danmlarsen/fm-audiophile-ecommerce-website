@@ -8,12 +8,20 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import IconCart from "../ui/icons/IconCart";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CartButton() {
   const { cartItems } = useCart();
 
+  const [cartIsOpen, setCartIsOpen] = useState(false);
+  const router = useRouter();
+
   return (
-    <DropdownMenu>
+    <DropdownMenu
+      open={cartIsOpen}
+      onOpenChange={(open) => setCartIsOpen(open)}
+    >
       <DropdownMenuTrigger className="relative grid size-10 place-items-center">
         <IconCart />
         {cartItems.length > 0 && (
@@ -27,7 +35,12 @@ export default function CartButton() {
         align="end"
         sideOffset={70}
       >
-        <Cart />
+        <Cart
+          onCheckout={() => {
+            setCartIsOpen(false);
+            router.push("/checkout");
+          }}
+        />
       </DropdownMenuContent>
     </DropdownMenu>
   );

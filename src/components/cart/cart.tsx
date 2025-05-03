@@ -5,10 +5,9 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { useState } from "react";
 import { formatPrice, urlFor } from "@/lib/utils";
-import Link from "next/link";
 import { AmountInput } from "../ui/amount-input";
 
-export default function Cart() {
+export default function Cart({ onCheckout }: { onCheckout?: () => void }) {
   const { cartItems, resetCart, calcTotal } = useCart();
 
   if (cartItems.length === 0)
@@ -34,8 +33,8 @@ export default function Cart() {
         <strong>{formatPrice(calcTotal())}</strong>
       </div>
 
-      <Button className="w-full" asChild>
-        <Link href="/checkout">Checkout</Link>
+      <Button className="w-full" onClick={onCheckout}>
+        Checkout
       </Button>
     </div>
   );
