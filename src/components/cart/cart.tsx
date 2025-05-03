@@ -3,7 +3,7 @@
 import { type TCartItem, useCart } from "@/components/cart/cart-context";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatPrice, urlFor } from "@/lib/utils";
 import Link from "next/link";
 import { AmountInput } from "../ui/amount-input";
@@ -27,7 +27,7 @@ export default function Cart() {
         </Button>
       </div>
 
-      <CartItemList />
+      <CartItemList cartItems={cartItems} />
 
       <div className="flex items-center justify-between">
         <span className="uppercase">Total</span>
@@ -42,13 +42,14 @@ export default function Cart() {
 }
 
 export function CartItemList({
+  cartItems,
   summary = false,
   collapsable = false,
 }: {
+  cartItems: TCartItem[];
   summary?: boolean;
   collapsable?: boolean;
 }) {
-  const { cartItems } = useCart();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const filteredCartItems =

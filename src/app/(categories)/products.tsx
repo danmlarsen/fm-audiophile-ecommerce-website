@@ -8,7 +8,7 @@ export default function Products({
 }) {
   return (
     <section>
-      <div className="space-y-40">
+      <div className="space-y-32 lg:space-y-40">
         {productsData.map((product, index) => (
           <ProductHero
             key={product.slug.current}

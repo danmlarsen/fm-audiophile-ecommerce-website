@@ -6,6 +6,8 @@ import { TProductDocument } from "@/types/productDocumentType";
 import { toast } from "sonner";
 import { AmountInput } from "@/components/ui/amount-input";
 import { useState } from "react";
+import { CartItemList } from "@/components/cart/cart";
+import Link from "next/link";
 
 export default function ProductAddToCart({
   product,
@@ -32,15 +34,25 @@ export default function ProductAddToCart({
       />
       <Button
         onClick={() => {
-          addCartItem({
+          const newCartItem = {
             id: product.slug.current,
             amount,
             name: product.cartName,
             price: product.price,
             image: product.cartThumbnail,
-          });
+          };
 
-          toast(`${product.name} x${amount} added to cart`);
+          addCartItem(newCartItem);
+
+          toast(
+            <div className="w-[300px] space-y-4">
+              <p>Product added to cart</p>
+              <CartItemList cartItems={[newCartItem]} summary={true} />
+              <Button asChild className="w-full">
+                <Link href="/checkout">Go to checkout</Link>
+              </Button>
+            </div>,
+          );
         }}
         disabled={cartAmount + amount > 99}
       >

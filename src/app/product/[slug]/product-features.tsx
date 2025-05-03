@@ -11,7 +11,7 @@ export default function ProductFeatures({
       <div className="grid gap-6 lg:grid-cols-[635px_auto]">
         <div className="space-y-8">
           <h2 className="text-4xl font-bold uppercase">Features</h2>
-          <div>
+          <div className="space-y-6">
             <PortableText value={product.featuresDescription} />
           </div>
         </div>

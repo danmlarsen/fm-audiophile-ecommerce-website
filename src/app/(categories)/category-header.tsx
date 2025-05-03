@@ -9,8 +9,10 @@ export default function CategoryHeader() {
 
   return (
     <header className="bg-[#141414] text-white">
-      <div className="grid h-[240px] place-items-center border-t border-white/20">
-        <h1 className="text-[40px] font-bold tracking-[1.43px]">{title}</h1>
+      <div className="grid h-[102px] place-items-center border-t border-white/20 md:h-[240px]">
+        <h1 className="text-[28px] font-bold tracking-[1.43px] md:text-[40px]">
+          {title}
+        </h1>
       </div>
     </header>
   );

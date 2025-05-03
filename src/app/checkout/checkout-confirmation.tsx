@@ -16,7 +16,7 @@ export default function CheckoutConfirmation({
   isSubmitted: boolean;
 }) {
   const router = useRouter();
-  const { resetCart } = useCart();
+  const { cartItems, resetCart } = useCart();
 
   return (
     <Dialog open={isSubmitted}>
@@ -31,7 +31,11 @@ export default function CheckoutConfirmation({
         <p>You will receive an email confirmation shortly.</p>
         <div className="grid min-h-[140px] overflow-hidden rounded-lg md:grid-cols-[1fr_auto]">
           <div className="bg-secondary p-4">
-            <CartItemList summary={true} collapsable={true} />
+            <CartItemList
+              cartItems={cartItems}
+              summary={true}
+              collapsable={true}
+            />
           </div>
           <div className="flex flex-col justify-end bg-black px-8 py-10 text-white md:w-[198px]">
             <div className="uppercase">Grand total</div>

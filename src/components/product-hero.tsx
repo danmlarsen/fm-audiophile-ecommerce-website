@@ -37,11 +37,16 @@ export default function ProductHero({
         </div>
         <div
           className={cn(
-            "flex items-center justify-center text-center lg:justify-end lg:text-start",
+            "flex items-center justify-center lg:justify-end",
             reverse && "lg:justify-start",
           )}
         >
-          <div className="max-w-[445px] space-y-6">
+          <div
+            className={cn(
+              "max-w-[445px] space-y-6",
+              !productPage && "text-center lg:text-left",
+            )}
+          >
             {product.newProduct && (
               <small className="text-primary tracking-[10px] uppercase">
                 New product

@@ -19,7 +19,7 @@ export default function CartSummary() {
       {cartItems.length === 0 && <p>No products added to cart.</p>}
       {cartItems.length > 0 && (
         <>
-          <CartItemList summary={true} />
+          <CartItemList cartItems={cartItems} summary={true} />
           <div className="space-y-2 uppercase">
             <div className="flex items-center justify-between">
               <span>Total</span>
