@@ -88,7 +88,7 @@ export function CartItem({
       ? urlFor(cartItem.image)?.width(64).height(64).url()
       : null;
 
-    const { setCartItemAmount } = useCart();
+    const { setCartItemAmount, removeCartItem } = useCart();
 
     return (
       <li className="grid grid-cols-[auto_1fr_auto] items-center gap-4">
@@ -112,6 +112,10 @@ export function CartItem({
               onAmountChanged={(newAmount) => {
                 if (newAmount > 0 && newAmount <= 99) {
                   setCartItemAmount(cartItem.id, newAmount);
+                }
+
+                if (newAmount <= 0) {
+                  removeCartItem(cartItem.id);
                 }
               }}
             />

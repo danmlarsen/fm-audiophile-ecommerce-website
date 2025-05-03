@@ -13,7 +13,7 @@ export type TCartItem = {
 type TCartContext = {
   cartItems: TCartItem[];
   addCartItem: (newCartItem: TCartItem) => void;
-  removeCartItem: (id: string, removeAmount: number) => void;
+  removeCartItem: (id: string, removeAmount?: number) => void;
   setCartItemAmount: (id: string, newAmount: number) => void;
   resetCart: () => void;
   calcTotal: () => number;
@@ -56,14 +56,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
-  function removeCartItem(id: string, removeAmount: number) {
+  function removeCartItem(id: string, removeAmount?: number) {
     setCartItems((prevCartItems) => {
       const currentCartItem = prevCartItems.find(
         (currentItem) => currentItem.id === id,
       );
       if (!currentCartItem) return prevCartItems;
 
-      if (currentCartItem.amount - removeAmount < 1)
+      if (!removeAmount || currentCartItem.amount - removeAmount < 1)
         return prevCartItems.filter((currentItem) => currentItem.id !== id);
 
       return prevCartItems.map((currentItem) =>
