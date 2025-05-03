@@ -27,7 +27,7 @@ export default function MobileNav() {
         <IconHamburger />
       </Button>
 
-      <DrawerContent className="space-y-20 pb-9">
+      <DrawerContent className="pb-9">
         <DrawerTitle className="hidden">Navigation</DrawerTitle>
         <div className="bg-[#141414] px-6 py-8 text-white md:px-10">
           <div className="flex items-center justify-between gap-10">
@@ -44,7 +44,7 @@ export default function MobileNav() {
             <CartButton />
           </div>
         </div>
-        <div className="px-6 md:px-10">
+        <div className="overflow-y-scroll px-6 pt-20 md:px-10">
           <ProductCategories />
         </div>
       </DrawerContent>
