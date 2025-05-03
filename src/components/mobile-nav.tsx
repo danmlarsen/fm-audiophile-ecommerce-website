@@ -1,19 +1,52 @@
+"use client";
+
+import { useState } from "react";
+import CartButton from "./cart/cart-button";
 import ProductCategories from "./product-categories";
 import { Button } from "./ui/button";
-import { Drawer, DrawerContent, DrawerTrigger } from "./ui/drawer";
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
 import IconHamburger from "./ui/icons/IconHamburger";
+import Logo from "./ui/logo";
 
 export default function MobileNav() {
-  return (
-    <Drawer direction="top" shouldScaleBackground={true}>
-      <DrawerTrigger asChild>
-        <Button variant="ghost" size="icon" className="lg:hidden">
-          <IconHamburger />
-        </Button>
-      </DrawerTrigger>
+  const [isOpen, setIsOpen] = useState(false);
 
-      <DrawerContent className="px-10 py-14">
-        <ProductCategories />
+  return (
+    <Drawer
+      direction="top"
+      shouldScaleBackground={true}
+      open={isOpen}
+      onClose={() => setIsOpen(false)}
+    >
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden"
+        onClick={() => setIsOpen((prevState) => !prevState)}
+      >
+        <IconHamburger />
+      </Button>
+
+      <DrawerContent className="space-y-20 pb-9">
+        <DrawerTitle className="hidden">Navigation</DrawerTitle>
+        <div className="bg-[#141414] px-6 py-8 text-white md:px-10">
+          <div className="flex items-center justify-between gap-10">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+            >
+              <IconHamburger />
+            </Button>
+            <div className="md:mr-auto lg:mr-0">
+              <Logo />
+            </div>
+            <CartButton />
+          </div>
+        </div>
+        <div className="px-6 md:px-10">
+          <ProductCategories />
+        </div>
       </DrawerContent>
     </Drawer>
   );
