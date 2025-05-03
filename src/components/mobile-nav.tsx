@@ -44,7 +44,7 @@ export default function MobileNav() {
             <CartButton />
           </div>
         </div>
-        <div className="overflow-y-scroll px-6 pt-20 md:px-10">
+        <div className="overflow-y-auto px-6 pt-20 md:px-10">
           <ProductCategories />
         </div>
       </DrawerContent>
