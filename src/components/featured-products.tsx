@@ -23,10 +23,10 @@ export default function FeaturedProducts() {
             className="pointer-events-none relative w-[207px] object-cover lg:absolute lg:-bottom-5 lg:left-40 lg:w-[375px]"
           />
           <div className="max-w-[349px] space-y-6 text-center lg:text-left">
-            <h2 className="text-4xl font-bold uppercase lg:text-6xl">
-              ZX9 Speaker
+            <h2 className="text-4xl !leading-[58px] font-bold uppercase lg:text-6xl">
+              ZX9 <br /> Speaker
             </h2>
-            <p>
+            <p className="text-white/75">
               Upgrade to premium speakers that are phenomenally built to deliver
               truly remarkable sound.
             </p>
@@ -44,7 +44,7 @@ export default function FeaturedProducts() {
             className="object-cover"
           />
           <div className="relative space-y-8">
-            <h2 className="text-2xl font-bold uppercase lg:text-4xl">
+            <h2 className="text-[28px] font-bold uppercase lg:text-4xl">
               ZX7 Speaker
             </h2>
             <Button variant="outline" asChild>
@@ -63,7 +63,7 @@ export default function FeaturedProducts() {
             />
           </div>
           <div className="flex min-h-[200px] flex-col items-start justify-center space-y-8 rounded-lg bg-gray-200 px-6 lg:px-24">
-            <h2 className="text-2xl font-bold uppercase lg:text-4xl">
+            <h2 className="text-[28px] font-bold uppercase lg:text-4xl">
               YX1 Earphones
             </h2>
             <Button variant="outline" asChild>

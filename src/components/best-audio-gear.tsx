@@ -13,11 +13,11 @@ export default function BestAudioGear() {
           className="object-cover"
         />
       </div>
-      <div className="flex flex-col justify-center text-center lg:text-start">
+      <div className="flex flex-col justify-center gap-8 text-center lg:text-start">
         <h2 className="text-[40px] font-bold uppercase">
           Bringing you the <span className="text-primary">best</span> audio gear
         </h2>
-        <p>
+        <p className="font-medium text-black/50">
           Located at the heart of New York City, Audiophile is the premier store
           for high end headphones, earphones, speakers, and audio accessories.
           We have a large showroom and luxury demonstration rooms available for
