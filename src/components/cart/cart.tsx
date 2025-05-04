@@ -7,7 +7,13 @@ import { useState } from "react";
 import { formatPrice, urlFor } from "@/lib/utils";
 import { AmountInput } from "../ui/amount-input";
 
-export default function Cart({ onCheckout }: { onCheckout?: () => void }) {
+export default function Cart({
+  onCheckout,
+  onResetCart,
+}: {
+  onCheckout?: () => void;
+  onResetCart?: () => void;
+}) {
   const { cartItems, resetCart, calcTotal } = useCart();
 
   if (cartItems.length === 0)
@@ -21,7 +27,14 @@ export default function Cart({ onCheckout }: { onCheckout?: () => void }) {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <h3>Cart ({cartItems.length})</h3>
-        <Button variant="ghost" className="px-0" onClick={resetCart}>
+        <Button
+          variant="ghost"
+          className="px-0"
+          onClick={() => {
+            onResetCart?.();
+            resetCart();
+          }}
+        >
           Remove all
         </Button>
       </div>

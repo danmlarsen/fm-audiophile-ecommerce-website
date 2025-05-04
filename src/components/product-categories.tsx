@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import IconArrowRight from "./ui/icons/IconArrowRight";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const categoryMockData = [
   {
@@ -28,9 +29,9 @@ const categoryMockData = [
 ];
 
 export default function ProductCategories({
-  onButtonClick,
+  onCategoryClick,
 }: {
-  onButtonClick?: () => void;
+  onCategoryClick?: () => void;
 }) {
   const router = useRouter();
 
@@ -38,15 +39,19 @@ export default function ProductCategories({
     <section>
       <div className="grid gap-4 md:grid-cols-3">
         {categoryMockData.map((category, index) => (
-          <div
+          <Link
+            href={category.href}
+            onClick={() => {
+              onCategoryClick?.();
+            }}
             key={category.title}
-            className="relative flex h-[217px] flex-col justify-end lg:h-[284px]"
+            className="group relative flex h-[217px] flex-col justify-end lg:h-[284px]"
           >
             <Image
               src={category.image}
               alt={category.title}
               className={cn(
-                "absolute inset-x-0 -top-2 z-10 mx-auto w-full max-w-[180px] object-cover md:-top-10 md:max-w-[200px] lg:-top-5 lg:max-w-[250px]",
+                "absolute inset-x-0 -top-2 z-10 mx-auto w-full max-w-[180px] object-cover transition-transform duration-300 group-hover:-translate-y-2.5 group-hover:scale-105 md:-top-10 md:max-w-[200px] lg:-top-5 lg:max-w-[250px]",
                 index === 1 && "lg:-top-2",
                 index === 2 && "top-2 md:-top-5 lg:-top-0",
               )}
@@ -55,17 +60,17 @@ export default function ProductCategories({
               <h4 className="!leading-none">{category.title}</h4>
               <Button
                 onClick={() => {
-                  onButtonClick?.();
+                  onCategoryClick?.();
                   router.push(category.href);
                 }}
                 variant="ghost"
-                className="flex h-[18px] items-center gap-2 py-0 font-bold tracking-[1px] text-black/50"
+                className="group-hover:text-primary flex h-[18px] items-center gap-2 py-0 font-bold tracking-[1px] text-black/50"
               >
                 <span>Shop</span>
                 <IconArrowRight className="text-primary" />
               </Button>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

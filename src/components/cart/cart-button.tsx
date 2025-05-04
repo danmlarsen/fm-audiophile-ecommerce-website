@@ -40,6 +40,9 @@ export default function CartButton() {
             setCartIsOpen(false);
             router.push("/checkout");
           }}
+          onResetCart={() => {
+            setCartIsOpen(false);
+          }}
         />
       </DropdownMenuContent>
     </DropdownMenu>

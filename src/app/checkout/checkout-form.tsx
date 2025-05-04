@@ -165,20 +165,26 @@ export default function CheckoutForm({
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <FormItem className="has-[:checked]:border-primary hover:border-primary flex items-center gap-4 rounded-md border border-gray-300 p-4">
-                      <FormControl>
-                        <RadioGroupItem value="eMoney" />
-                      </FormControl>
-                      <FormLabel className="cursor-pointer">e-Money</FormLabel>
+                    <FormItem>
+                      <label
+                        htmlFor="eMoney"
+                        className="has-[:checked]:border-primary hover:border-primary flex cursor-pointer items-center gap-4 rounded-md border border-gray-300 p-4 transition-colors duration-300"
+                      >
+                        <FormControl>
+                          <RadioGroupItem id="eMoney" value="eMoney" />
+                        </FormControl>
+                        <span>e-Money</span>
+                      </label>
                     </FormItem>
-                    <FormItem className="has-[:checked]:border-primary hover:border-primary flex items-center gap-4 rounded-md border border-gray-300 p-4">
+                    <label
+                      htmlFor="cod"
+                      className="has-[:checked]:border-primary hover:border-primary flex cursor-pointer items-center gap-4 rounded-md border border-gray-300 p-4 transition-colors duration-300"
+                    >
                       <FormControl>
-                        <RadioGroupItem value="cod" />
+                        <RadioGroupItem id="cod" value="cod" />
                       </FormControl>
-                      <FormLabel className="cursor-pointer">
-                        Cash on Delivery
-                      </FormLabel>
-                    </FormItem>
+                      <span className="cursor-pointer">Cash on Delivery</span>
+                    </label>
                   </RadioGroup>
                 </FormControl>
               </FormItem>
