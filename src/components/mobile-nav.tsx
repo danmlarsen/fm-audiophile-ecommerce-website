@@ -4,7 +4,7 @@ import { useState } from "react";
 import CartButton from "./cart/cart-button";
 import ProductCategories from "./product-categories";
 import { Button } from "./ui/button";
-import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "./ui/drawer";
+import { Drawer, DrawerContent, DrawerTitle } from "./ui/drawer";
 import IconHamburger from "./ui/icons/IconHamburger";
 import Logo from "./ui/logo";
 

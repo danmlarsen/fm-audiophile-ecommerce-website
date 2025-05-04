@@ -54,6 +54,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  /* --breakpoint-lg: 80rem; */
+}
+
 @theme inline {
   --color-gray-200: hsl(0, 0%, 95%);
   --color-background: var(--background);

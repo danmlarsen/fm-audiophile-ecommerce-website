@@ -11,10 +11,10 @@ export default function Footer() {
       </div>
       <div className="mt-9 grid gap-y-14 md:grid-cols-2">
         <p className="text-center text-white/50 md:col-span-2 md:text-start lg:col-span-1">
-          Audiophile is an all in one stop to fulfill your audio needs. We're a
-          small team of music lovers and sound specialists who are devoted to
-          helping you get the most out of personal audio. Come and visit our
-          demo facility - we’re open 7 days a week.
+          Audiophile is an all in one stop to fulfill your audio needs.
+          We&apos;re a small team of music lovers and sound specialists who are
+          devoted to helping you get the most out of personal audio. Come and
+          visit our demo facility - we&apos;re open 7 days a week.
         </p>
         <div className="order-1 flex items-center justify-center md:justify-end lg:order-none lg:row-span-2">
           <Socials />

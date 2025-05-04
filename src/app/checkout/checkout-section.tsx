@@ -63,7 +63,7 @@ export default function CheckoutSection() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof checkoutFormSchema>) {}
+  function onSubmit() {}
 
   return (
     <>

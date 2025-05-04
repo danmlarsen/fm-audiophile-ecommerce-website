@@ -8,9 +8,18 @@ import { client } from "@/sanity/client";
 import { type TProductDocument } from "@/types/productDocumentType";
 import ProductAlternatives from "./product-alternatives";
 
-const PRODUCTS_QUERY = defineQuery(
+const PRODUCT_QUERY = defineQuery(
   `*[_type == 'product' && slug.current == $slug][0]{..., alternatives[0..2]->{name,slug,mainImage,shortName}}`,
 );
+
+export async function generateStaticParams() {
+  const products = await client.fetch<
+    SanityDocument<{ slug: { current: string } }[]>
+  >(`*[_type == 'product']{slug}`);
+  return products.map((product) => ({
+    slug: product.slug.current,
+  }));
+}
 
 export default async function ProductPage({
   params,
@@ -20,7 +29,7 @@ export default async function ProductPage({
   const { slug } = await params;
 
   const product = await client.fetch<SanityDocument<TProductDocument>>(
-    PRODUCTS_QUERY,
+    PRODUCT_QUERY,
     { slug },
   );
 

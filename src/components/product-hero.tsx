@@ -58,10 +58,12 @@ export default function ProductHero({
             </div>
 
             {productPage ? (
-              <>
-                <strong>{formatPrice(product.price)}</strong>
+              <div className="space-y-12">
+                <div className="text-lg font-bold">
+                  {formatPrice(product.price)}
+                </div>
                 <ProductAddToCart product={product} />
-              </>
+              </div>
             ) : (
               <Button asChild>
                 <Link href={`/product/${product.slug.current}`}>
