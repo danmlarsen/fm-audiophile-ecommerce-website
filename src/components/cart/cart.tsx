@@ -61,10 +61,11 @@ export function CartItemList({
           <CartItem key={cartItem.id} cartItem={cartItem} summary={summary} />
         ))}
       </ul>
-      {collapsable && (
+      {collapsable && cartItems.length > 1 && (
         <div className="border-t border-[#979797]/10 py-2 text-center">
           <Button
             variant="ghost"
+            className="text-black/50"
             onClick={() => setIsCollapsed((prevState) => !prevState)}
           >
             {isCollapsed && <>and {cartItems.length - 1} other item(s)</>}

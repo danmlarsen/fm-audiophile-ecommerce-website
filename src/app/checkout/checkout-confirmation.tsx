@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import IconOrderConfirmation from "@/components/ui/icons/IconOrderConfirmation";
+import { formatPrice } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 export default function CheckoutConfirmation({
@@ -16,7 +17,12 @@ export default function CheckoutConfirmation({
   isSubmitted: boolean;
 }) {
   const router = useRouter();
-  const { cartItems, resetCart } = useCart();
+  const { cartItems, resetCart, calcTotal } = useCart();
+
+  const totalPrice = calcTotal();
+  const shippingPrice = 50;
+  const vatPrice = totalPrice * 0.2;
+  const grandTotal = Math.ceil(totalPrice + shippingPrice + vatPrice);
 
   return (
     <Dialog open={isSubmitted}>
@@ -30,7 +36,7 @@ export default function CheckoutConfirmation({
 
         <p>You will receive an email confirmation shortly.</p>
         <div className="grid min-h-[140px] overflow-hidden rounded-lg md:grid-cols-[1fr_auto]">
-          <div className="bg-secondary p-4">
+          <div className="bg-secondary grid items-center p-4">
             <CartItemList
               cartItems={cartItems}
               summary={true}
@@ -38,8 +44,10 @@ export default function CheckoutConfirmation({
             />
           </div>
           <div className="flex flex-col justify-end bg-black px-8 py-10 text-white md:w-[198px]">
-            <div className="uppercase">Grand total</div>
-            <div>$5,446</div>
+            <div className="font-medium text-white/50 uppercase">
+              Grand total
+            </div>
+            <div className="text-lg font-bold">{formatPrice(grandTotal)}</div>
           </div>
         </div>
 
