@@ -14,7 +14,7 @@ export default function ProductLayout({
 
   return (
     <div className="px-6 md:px-10">
-      <div className="mx-auto max-w-6xl lg:mt-32 lg:space-y-14">
+      <div className="mx-auto mt-4 max-w-6xl md:mt-12 lg:mt-32 lg:space-y-14">
         <Button variant="ghost" onClick={() => router.back()} className="px-0">
           Go Back
         </Button>

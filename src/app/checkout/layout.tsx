@@ -12,7 +12,7 @@ export default function CheckoutLayout({
 
   return (
     <div className="px-6">
-      <div className="mx-auto mt-32 max-w-6xl space-y-14">
+      <div className="mx-auto mt-4 max-w-6xl space-y-14 md:mt-12 lg:mt-32">
         <Button variant="ghost" onClick={() => router.back()} className="px-0">
           Go Back
         </Button>

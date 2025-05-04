@@ -45,7 +45,7 @@ export default function MobileNav() {
           </div>
         </div>
         <div className="overflow-y-auto px-6 pt-20 md:px-10">
-          <ProductCategories />
+          <ProductCategories onButtonClick={() => setIsOpen(false)} />
         </div>
       </DrawerContent>
     </Drawer>
