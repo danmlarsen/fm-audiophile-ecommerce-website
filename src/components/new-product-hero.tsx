@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function NewProductHero() {
   return (
-    <section className="relative bg-[#181818] px-6 text-white">
+    <section className="relative bg-[#181818] text-white md:px-6 lg:px-10">
       <Image
         src={ImageHeroMobile}
         alt="Headphones"
@@ -29,8 +29,8 @@ export default function NewProductHero() {
         fill
         sizes="100vw"
       />
-      <div className="relative mx-auto grid min-h-[calc(100vh-90px)] max-w-6xl items-center justify-center overflow-hidden border-t border-white/20 lg:h-[729px] lg:min-h-0 lg:grid-cols-2 lg:justify-start">
-        <div className="relative mx-auto flex flex-col items-center justify-center space-y-6 py-28 text-center md:max-w-[398px] lg:mx-0 lg:items-start lg:text-left">
+      <div className="mx-auto grid min-h-[calc(100vh-90px)] max-w-6xl items-center justify-center overflow-hidden lg:h-[729px] lg:min-h-0 lg:grid-cols-2 lg:justify-start">
+        <div className="relative mx-auto flex max-w-[328px] flex-col items-center justify-center space-y-6 py-28 text-center md:max-w-[379px] lg:mx-0 lg:items-start lg:text-left">
           <small className="text-sm font-normal tracking-[10px] text-white/50 uppercase">
             New Product
           </small>
