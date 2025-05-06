@@ -26,15 +26,17 @@ export default function CheckoutConfirmation({
 
   return (
     <Dialog open={isSubmitted}>
-      <DialogContent className="space-y-8 p-12 md:max-w-[540px]">
-        <DialogHeader className="space-y-8">
+      <DialogContent className="p-8 md:max-w-[540px] md:gap-6 md:p-12">
+        <DialogHeader className="md:gap-8">
           <IconOrderConfirmation />
-          <DialogTitle className="max-w-[284px] text-start text-3xl">
+          <DialogTitle className="max-w-[284px] text-start text-[24px] leading-0 md:text-[32px]">
             Thank you for your order
           </DialogTitle>
         </DialogHeader>
 
-        <p>You will receive an email confirmation shortly.</p>
+        <p className="text-black/50">
+          You will receive an email confirmation shortly.
+        </p>
         <div className="grid min-h-[140px] overflow-hidden rounded-lg md:grid-cols-[1fr_auto]">
           <div className="bg-secondary grid items-center p-4">
             <CartItemList
